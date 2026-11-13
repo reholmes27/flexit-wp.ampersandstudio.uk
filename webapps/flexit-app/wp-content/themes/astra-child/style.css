@@ -1,0 +1,546 @@
+/**
+Theme Name: Cinnamon
+Author: Ampersand Studio
+Author URI: https://ampersandstudio.uk/
+Description: Astra is the fastest, fully customizable & beautiful theme suitable for blogs, personal portfolios and business websites. It is very lightweight (less than 50KB on frontend) and offers unparalleled speed. Built with SEO in mind, Astra comes with schema.org code integrated so search engines will love your site. Astra offers plenty of sidebar options and widget areas giving you a full control for customizations. Furthermore, we have included special features and templates so feel free to choose any of your favorite page builder plugin to create pages flexibly. Some of the other features: # WooCommerce Ready # Responsive # Compatible with major plugins # Translation Ready # Extendible with premium addons # Regularly updated # Designed, Developed, Maintained & Supported by Brainstorm Force. Looking for a perfect base theme? Look no further. Astra is fast, fully customizable and beautiful theme!
+Version: 1.0.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: cinnamon
+Template: astra
+*/
+
+/* Desktop primary dropdowns: fit their own items, including future menu edits. */
+@media (min-width: 993px) {
+	/* Reference active trail: 4px blue line, 6px below the label's line box. */
+	#desktop-header-primary-menu .menu > li:is(.current-menu-item, .current-menu-ancestor)::after {
+		content: "";
+		position: absolute;
+		inset: calc(50% + 0.5lh + 6px) 0 auto;
+		height: 4px;
+		background: #5dccdb;
+		pointer-events: none;
+	}
+	#desktop-header-primary-menu .pp-advanced-menu .sub-menu {
+		width: max-content;
+		max-width: calc(100vw - 40px);
+		overflow-wrap: anywhere;
+	}
+	/* Keep nested arrows beside their labels, with the reference's 10px gap. */
+	#desktop-header-primary-menu .sub-menu .menu-item-text {
+		padding-right: 0;
+	}
+	#desktop-header-primary-menu .sub-menu .pp-menu-toggle {
+		position: relative;
+		display: inline-block;
+		inset: auto;
+		margin: 0 0 0 10px;
+		width: 8px;
+		height: 8px;
+		vertical-align: middle;
+	}
+	/* Match the IT Solutions dropdown's inset dividers and full-width hover rows. */
+	#desktop-header-primary-menu .menu > li > .sub-menu:has(> li > .pp-has-submenu-container) > li {
+		margin-inline: 10px;
+
+		> :is(.pp-has-submenu-container, a.menu-link) { margin-inline: -10px; }
+		> a.menu-link, > .pp-has-submenu-container > a.menu-link {
+			font-weight: 600;
+			line-height: 24px;
+			padding-block: 7px;
+		}
+		> ul.sub-menu { top: -10px; }
+		&:not(.pp-menu-submenu-right) > ul.sub-menu { left: calc(100% + 6px); }
+
+		/* The link and keyboard toggle share one highlight, including over the arrow. */
+		> .pp-has-submenu-container {
+			position: relative;
+			display: flex;
+			border-radius: 8px;
+			color: #626262;
+
+			&:is(:hover, :focus-within) { color: #5dccdb; background: rgba(169, 219, 226, 0.3); }
+			> a.menu-link { position: static; padding-inline-end: 0; color: inherit; background: transparent; }
+			> a.menu-link::after { content: ""; position: absolute; inset: 0; }
+			> .pp-menu-toggle { flex: 0 0 28px; height: auto; margin: 0; }
+		}
+	}
+}
+
+/* Match reference hover corners: desktop submenus and all tablet/mobile links. */
+:is(#desktop-header-primary-menu, #desktop-header-secondary-menu) .sub-menu a.menu-link,
+:is(#mobile-header-primary-menu, #mobile-header-secondary-menu) a.menu-link {
+	border-radius: 8px;
+}
+
+/* Desktop: keep straight separators outside the rounded links, with a 3px gap. */
+@media (min-width: 993px) {
+	:is(#desktop-header-primary-menu, #desktop-header-secondary-menu) .sub-menu > li {
+		padding-block: 3px;
+	}
+	:is(#desktop-header-primary-menu, #desktop-header-secondary-menu) .sub-menu > li:not(:last-child) {
+		border-bottom: 2px solid #e5e5e5;
+	}
+	:is(#desktop-header-primary-menu, #desktop-header-secondary-menu) .sub-menu a.menu-link {
+		border-bottom: 0;
+	}
+}
+
+/* Header chevrons: match flex.co.uk while retaining PowerPack's menu controls. */
+:is(#desktop-header-primary-menu, #desktop-header-secondary-menu, #mobile-header-primary-menu, #mobile-header-secondary-menu) .pp-menu-toggle {
+	transform: none;
+}
+
+:is(#desktop-header-primary-menu, #desktop-header-secondary-menu, #mobile-header-primary-menu, #mobile-header-secondary-menu) .pp-menu-toggle::before {
+	content: "";
+	box-sizing: border-box;
+	width: 8px;
+	height: 8px;
+	top: 50%;
+	left: 50%;
+	right: auto;
+	margin: 0;
+	border: solid #626262;
+	border-width: 0 2px 2px 0;
+	transform-origin: center;
+	transform: translate(-50%, -50%) translateY(-2px) rotate(45deg);
+	transition: border-color 0.2s, transform 0.4s;
+}
+
+/* Desktop: only the open top-level item turns turquoise and points upward. */
+:is(#desktop-header-primary-menu, #desktop-header-secondary-menu) .menu > li:is(:hover, .focus, .pp-active) > .pp-has-submenu-container .pp-menu-toggle::before {
+	border-color: #5dccdb;
+	transform: translate(-50%, -50%) translateY(3px) rotateX(180deg) rotateZ(45deg);
+}
+
+/* Nested desktop flyouts keep the reference site's grey, right-facing arrow. */
+:is(#desktop-header-primary-menu, #desktop-header-secondary-menu) .sub-menu .pp-menu-toggle::before {
+	transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+/* Follow PowerPack when a flyout is moved left to stay inside the viewport. */
+:is(#desktop-header-primary-menu, #desktop-header-secondary-menu) .sub-menu .pp-menu-submenu-right > .pp-has-submenu-container .pp-menu-toggle::before {
+	transform: translate(-50%, -50%) rotate(135deg);
+}
+
+/* Tablet/mobile: each accordion arrow follows its own expanded state. */
+:is(#mobile-header-primary-menu, #mobile-header-secondary-menu) .pp-active > .pp-has-submenu-container .pp-menu-toggle::before {
+	transform: translate(-50%, -50%) translateY(2px) rotateX(180deg) rotateZ(45deg);
+}
+
+:is(#mobile-header-primary-menu, #mobile-header-secondary-menu) .pp-menu-toggle {
+	border-radius: 8px;
+	transition: background-color 0.2s;
+}
+
+:is(#mobile-header-primary-menu, #mobile-header-secondary-menu) .pp-menu-toggle:is(:hover, :focus) {
+	background-color: rgba(169, 219, 226, 0.3);
+}
+
+:is(#mobile-header-primary-menu, #mobile-header-secondary-menu) .pp-menu-toggle:is(:hover, :focus)::before {
+	border-color: #5dccdb;
+}
+
+@media (max-width: 992px) {
+	/* Reference hamburger: a 46px target with centred, square 20px strokes. */
+	#mobile-menu-canvas .pp-offcanvas-toggle {
+		width: 46px;
+		height: 46px;
+		padding: 0;
+		justify-content: center;
+		background: transparent;
+	}
+	#mobile-menu-canvas .pp-hamburger-box { margin: 0; height: 16px; }
+	#mobile-menu-canvas .pp-hamburger-inner { margin-top: -1px; }
+	#mobile-menu-canvas .pp-hamburger-inner,
+	#mobile-menu-canvas .pp-hamburger-inner::before,
+	#mobile-menu-canvas .pp-hamburger-inner::after { border-radius: 0; }
+	#mobile-menu-canvas .pp-hamburger-inner::before { top: -7px; }
+	#mobile-menu-canvas .pp-hamburger-inner::after { top: 7px; bottom: auto; }
+	/* Keep PowerPack's close behaviour; match the reference's 20px navy cross. */
+	#offcanvas-6npfbvlq1yzt .pp-offcanvas-close { padding: 13px; }
+	#offcanvas-6npfbvlq1yzt .pp-offcanvas-close-icon { width: 20px; height: 20px; }
+	#offcanvas-6npfbvlq1yzt .pp-offcanvas-close-icon::before,
+	#offcanvas-6npfbvlq1yzt .pp-offcanvas-close-icon::after { background: #101c3d; }
+	/* Let panel content set its height; keep long expanded menus scrollable. */
+	#offcanvas-6npfbvlq1yzt {
+		height: auto;
+		max-height: 100dvh;
+		padding: 0;
+	}
+	#offcanvas-6npfbvlq1yzt .pp-offcanvas-body { position: relative; }
+	#offcanvas-6npfbvlq1yzt .pp-offcanvas-header { position: absolute; top: 10px; right: 10px; z-index: 1; }
+	/* Reserve a separate 50px arrow target and 10px gap, retaining native controls. */
+	:is(#mobile-header-primary-menu, #mobile-header-secondary-menu) .pp-has-submenu-container > a { width: calc(100% - 60px); }
+	:is(#mobile-header-primary-menu, #mobile-header-secondary-menu) .menu-item-text { padding-right: 0; }
+	:is(#mobile-header-primary-menu, #mobile-header-secondary-menu) .pp-menu-toggle {
+		width: 50px;
+		height: 100%;
+		top: 0;
+		right: 0;
+		margin: 0;
+	}
+	/* Clear current-item/ancestor fills; highlight only the hovered or focused link. */
+	:is(#mobile-header-primary-menu, #mobile-header-secondary-menu) a.menu-link {
+		background-color: transparent;
+		color: #222222;
+	}
+	:is(#mobile-header-primary-menu, #mobile-header-secondary-menu) a.menu-link:is(:hover, :focus-visible):not(:has(.pp-menu-toggle:is(:hover, :focus))) {
+		background-color: rgba(169, 219, 226, 0.3);
+		color: #5dccdb;
+	}
+}
+
+/* Respect reduced-motion preferences without changing open/closed states. */
+@media (prefers-reduced-motion: reduce) {
+	:is(#desktop-header-primary-menu, #desktop-header-secondary-menu, #mobile-header-primary-menu, #mobile-header-secondary-menu) .pp-menu-toggle,
+	:is(#desktop-header-primary-menu, #desktop-header-secondary-menu, #mobile-header-primary-menu, #mobile-header-secondary-menu) .pp-menu-toggle::before {
+		transition: none;
+	}
+}
+
+/* Service cards: shared hover/focus, including cards missing the wrapper class. */
+.fl-builder-content :is(.box-which-contain-light-blue-box-and-buttons, .fl-module-box:has(> .our-services-light-blue-box)) { gap: 24px; }
+.fl-builder-content .our-services-light-blue-box { height: auto; min-height: 0; max-height: none; aspect-ratio: 1; transition: background-color .2s; }
+.fl-builder-content :is(.box-which-contain-light-blue-box-and-buttons, .fl-module-box:has(> .our-services-light-blue-box)):is(:hover, :focus-within) {
+	/* Descendant selectors keep each card's own PowerPack rollover images. */
+	.our-services-light-blue-box { background-color: #101c3d; }
+	.our-services-inner-icon .pp-photo-rollover .pp-photo-content .pp-photo-content-inner:first-child { opacity: 0; visibility: hidden; }
+	.our-services-inner-icon .pp-photo-rollover .pp-photo-content .pp-photo-content-inner:last-child { opacity: 1; visibility: visible; }
+	.our-services-card-headings-button .fl-button:is(a, button) { border-bottom-color: #5dccdb; }
+}
+.fl-builder-content .our-services-card-headings-button.fl-module-button .fl-button:is(a, button) { padding: 0 0 5px; line-height: 1.4; }
+
+/* Brochure: locate the reusable Beaver Builder panel by its named form module. */
+.fl-builder-content .fl-module-box:has(> .fl-module-box > .download-our-brochure-powerpack-wpforms-style) {
+	position: relative; width: 100%; max-width: 1161.67px; height: auto; padding: 50px; gap: 30px; margin-inline: auto;
+}
+.fl-builder-content .fl-module-box:has(> .fl-module-box > .download-our-brochure-powerpack-wpforms-style) > .fl-module-box:last-child:not(:has(*)) {
+	/* Retain the existing decorative box without letting it enlarge the panel. */
+	position: absolute; top: 95%; left: 25%; width: 50%; height: 10%; margin: 0; background: #5dccdb; mix-blend-mode: multiply; pointer-events: none;
+}
+.fl-builder-content .fl-module-box:has(> .fl-module-box > .download-our-brochure-powerpack-wpforms-style) .fl-heading {
+	margin: 0; font-size: clamp(24px, 4.56587px + 2.53378vw, 34px); line-height: clamp(32px, 4.79222px + 3.5473vw, 46px); font-weight: 400; text-align: center;
+}
+.download-our-brochure-powerpack-wpforms-style .fl-module-content { margin: 0; }
+.download-our-brochure-powerpack-wpforms-style .pp-wpforms-content { padding: 0; max-width: 902px; width: 100%; margin-inline: auto; }
+.download-our-brochure-powerpack-wpforms-style div.wpforms-container { margin: 0; }
+.download-our-brochure-powerpack-wpforms-style #wpforms-form-516 { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 80px; align-items: start; }
+.download-our-brochure-powerpack-wpforms-style #wpforms-form-516 .wpforms-field-container { min-width: 0; }
+.download-our-brochure-powerpack-wpforms-style #wpforms-form-516 :is(.wpforms-field-email, .wpforms-submit-container) { margin: 0; padding: 0; }
+.download-our-brochure-powerpack-wpforms-style #wpforms-form-516 input[type=email] { height: auto; min-height: 0; padding: 15px 24px; font: 700 16px/1 Montserrat, sans-serif; border: 1px solid #626262; border-radius: 10px; }
+.download-our-brochure-powerpack-wpforms-style #wpforms-form-516 input[type=email]::placeholder { color: #626262; opacity: 1; }
+.download-our-brochure-powerpack-wpforms-style #wpforms-form-516 input[type=email]:focus { border-color: #5dccdb; }
+.download-our-brochure-powerpack-wpforms-style #wpforms-form-516 .wpforms-submit {
+	/* WPForms fixes height independently of PowerPack padding; allow content sizing. */
+	height: auto; min-height: 0; padding: 15px 32px; margin: 0; font: 700 16px/1 Montserrat, sans-serif;
+	border: 3px solid #222; border-radius: 10px; background: transparent; color: #222; white-space: nowrap; box-shadow: none; transition: background-color .2s, color .2s, border-color .2s;
+}
+.download-our-brochure-powerpack-wpforms-style #wpforms-form-516 .wpforms-submit:is(:hover, :focus-visible) { background: #101c3d; border-color: #101c3d; color: #fff; }
+/* Error notices and anti-spam controls retain their native behaviour and visibility. */
+.download-our-brochure-powerpack-wpforms-style #wpforms-form-516 > :not(.wpforms-field-container, .wpforms-submit-container, input) { grid-column: 1 / -1; }
+@media (max-width: 767px) {
+	.fl-builder-content :is(.box-which-contain-light-blue-box-and-buttons, .fl-module-box:has(> .our-services-light-blue-box)) { gap: 14px; }
+	.fl-builder-content .our-services-card-headings-button.fl-module-button .fl-button:is(a, button) { font-weight: 400; font-size: 16px; line-height: 1.5; }
+	.download-our-brochure-powerpack-wpforms-style #wpforms-form-516 { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+	.download-our-brochure-powerpack-wpforms-style #wpforms-form-516 .wpforms-submit-container { justify-self: center; }
+	.fl-builder-content .fl-module-box:has(> .fl-module-box > .download-our-brochure-powerpack-wpforms-style) .fl-heading { font-size: clamp(20px, 9.92661px + 1.83486vw, 24px); line-height: clamp(26px, 10.8899px + 2.75229vw, 32px); }
+}
+@media (max-width: 549px) {
+	.fl-builder-content .fl-module-box:has(> .fl-module-box > .download-our-brochure-powerpack-wpforms-style) { padding: 30px 30px calc(5% + 30px); }
+	.download-our-brochure-powerpack-wpforms-style #wpforms-form-516 .wpforms-submit-container { width: 100%; }
+}
+@media (max-width: 349px) {
+	.fl-builder-content .our-services-card-headings-button.fl-module-button .fl-button:is(a, button) { font-size: 14px; }
+}
+@media (prefers-reduced-motion: reduce) {
+	.fl-builder-content .our-services-light-blue-box, .download-our-brochure-powerpack-wpforms-style #wpforms-form-516 .wpforms-submit { transition: none; }
+}
+
+/* Colour only unordered-list bullets; supports the class on the list or its module. */
+ul.blue-bullets > li::marker,
+.blue-bullets ul > li::marker {
+	color: #5dcddb;
+}
+
+/* Match the reference list's 0.8em gap without adding space after the last item. */
+ul.blue-bullets > li:not(:last-child) { margin-bottom: 0.8em; }
+
+/* Opt-in link utility: remove the underline on hover only. */
+a.no-underline-on-hour:hover {
+    text-decoration: none !important;
+}
+
+/* Keep the surrounding text colour in normal and hover states.
+ * Important lets these opt-in utilities override theme/page-builder link styles.
+ */
+a.no-color-change-on-hour,
+a.no-color-change-on-hour:hover {
+    color: inherit !important;
+}
+/* Opt-in ordered lists: match the reference indent, outer spacing and line height. */
+ol.ordered-list-items-style { margin: 1.4em 0; padding: 0; line-height: 1.5; }
+ol.ordered-list-items-style > li { margin: 0 0 0 20px; padding: 0; list-style: decimal outside; }
+/* Space items without adding an extra gap after the final item. */
+ol.ordered-list-items-style > li:not(:last-child) { margin-bottom: 0.8em; }
+/* Match the reference's bold numbers while keeping item text at its normal weight. */
+ol.ordered-list-items-style > li::marker { font-weight: 700; }
+
+/* TechMoves newsletter only: require both the opt-in module class and form 902. */
+.fl-builder-content .fl-module-box:has(> .fl-module-box > .sign-up-to-our-techmoves-newsletter-powerpack-wpforms-style #wpforms-902) {
+	position: relative; width: 100%; max-width: 1161.6667px; height: auto; padding: 50px; gap: 30px; margin-inline: auto; background: #a9dbe2; border-radius: 20px;
+	.fl-heading { margin: 0; font-size: clamp(24px, 4.56587px + 2.53378vw, 34px); line-height: clamp(32px, 4.79222px + 3.5473vw, 46px); font-weight: 400; text-align: center; }
+	> .fl-module-box:last-child:not(:has(*)) { position: absolute; top: 95%; left: 25%; width: 50%; height: 10%; min-height: 0; max-height: none; margin: 0; background: #5dccdb; mix-blend-mode: multiply; pointer-events: none; }
+}
+.sign-up-to-our-techmoves-newsletter-powerpack-wpforms-style:has(#wpforms-902) {
+	.fl-module-content, div.wpforms-container { margin: 0; }
+	.pp-wpforms-content { padding: 0; width: 100%; max-width: 923.3333px; margin-inline: auto; }
+	#wpforms-form-902 {
+		/* Keep WPForms' field wrappers, validation and hidden anti-spam fields intact. */
+		display: grid; grid-template-columns: minmax(0, 1fr) 150px; gap: 25px 40px; align-items: start;
+		.wpforms-field-container { min-width: 0; }
+		:is(.wpforms-field-layout, .wpforms-field-name, .wpforms-field-email, .wpforms-field-checkbox, .wpforms-submit-container) { margin: 0; padding: 0; }
+		.wpforms-layout-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 25px 40px; margin: 0; }
+		.wpforms-layout-column { width: auto; min-width: 0; padding: 0; }
+		:is(.wpforms-field-name, .wpforms-field-email) input { width: 100%; max-width: 100%; height: 49px; min-height: 0; padding: 15px 24px; font: 600 16px/1 Montserrat, sans-serif; color: #101c3d; background: #fff; border: 1px solid #626262; border-radius: 10px; }
+		input::placeholder { color: #626262; opacity: 1; }
+		:is(.wpforms-field-name, .wpforms-field-email) input:focus { border-color: #5dccdb; }
+		.wpforms-field-layout { min-height: 52px; }
+		.wpforms-field-checkbox { margin-top: 25px; }
+		/* Reference consent: inline label and turquoise inset fill, without a tick. */
+		.wpforms-field-checkbox li { display: block; margin: 0; font: 400 16px/24px Montserrat, sans-serif; }
+		input[type=checkbox] { appearance: none; display: inline-block; vertical-align: middle; box-sizing: border-box; width: 32px; height: 32px; padding: 4px; margin: 0 5px; border: 2px solid #626262; border-radius: 8px; background: #fff; box-shadow: none; cursor: default; }
+		input[type=checkbox]::before, input[type=checkbox]::after { display: none; }
+		input[type=checkbox]:checked { background-color: #5dccdb; background-clip: content-box; }
+		input[type=checkbox]:focus { outline: 2px solid #101c3d; outline-offset: 0; }
+		.wpforms-field-label-inline { display: inline; vertical-align: baseline; margin: 0; padding: 0 0 0 4px; font: 400 16px/24px Montserrat, sans-serif; color: #222; cursor: default; }
+		.wpforms-submit { width: 150px; height: auto; min-height: 0; margin: 0; padding: 15px 32px; font: 600 16px/1 Montserrat, sans-serif; border: 3px solid #222; border-radius: 10px; background: transparent; color: #222; box-shadow: none; white-space: nowrap; transition: background-color .2s, color .2s, border-color .2s; }
+		.wpforms-submit:is(:hover, :focus-visible) { background: #101c3d; border-color: #101c3d; color: #fff; }
+		> :not(.wpforms-field-container, .wpforms-submit-container, input) { grid-column: 1 / -1; }
+	}
+}
+/* Reference breakpoints: tablet button below consent; mobile fields stacked. */
+@media (max-width: 1029px) {
+	.sign-up-to-our-techmoves-newsletter-powerpack-wpforms-style:has(#wpforms-902) #wpforms-form-902 { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 767px) {
+	.sign-up-to-our-techmoves-newsletter-powerpack-wpforms-style:has(#wpforms-902) #wpforms-form-902 .wpforms-layout-row { grid-template-columns: minmax(0, 1fr); }
+	.fl-builder-content .fl-module-box:has(> .fl-module-box > .sign-up-to-our-techmoves-newsletter-powerpack-wpforms-style #wpforms-902) .fl-heading { font-size: clamp(20px, 9.92661px + 1.83486vw, 24px); line-height: clamp(26px, 10.8899px + 2.75229vw, 32px); }
+}
+@media (max-width: 549px) {
+	.fl-builder-content .fl-module-box:has(> .fl-module-box > .sign-up-to-our-techmoves-newsletter-powerpack-wpforms-style #wpforms-902) { padding: 30px 30px calc(30px + 5%); }
+}
+@media (prefers-reduced-motion: reduce) {
+	.sign-up-to-our-techmoves-newsletter-powerpack-wpforms-style:has(#wpforms-902) #wpforms-form-902 .wpforms-submit { transition: none; }
+}
+
+/* Keep a lone service card the same width as cards in a pair (35px gap). */
+.fl-builder-content .box-which-contain-light-blue-box-and-buttons:only-child { width: calc(50% - 17.5px); }
+
+/* Contact form 1404: retain the newer fonts and styling configured in PowerPack. */
+/* Match the column proportions without changing the contact-details modules. */
+.fl-builder-content .fl-module-box:has(> .bb-box-contains-powerpack-wpforms-module) { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.142857%; max-width: 1400px; align-items: start; }
+.fl-builder-content .fl-module-box:has(> .bb-box-contains-powerpack-wpforms-module) > .fl-module-box { width: auto; min-width: 0; }
+.fl-builder-content .bb-box-contains-powerpack-wpforms-module { gap: 24px; }
+.fl-builder-content .wpforms-contactus-heading-style { font-size: clamp(20px, 8.339527px + 1.52027vw, 26px); line-height: calc(1em + 8px); }
+
+/* Remove plugin wrapper spacing; retain the configured field sizes and borders. */
+.contactus-wpforms-powerpack-module-style .pp-wpforms-content { padding-block: 0; }
+.contactus-wpforms-powerpack-module-style #wpforms-1404 { margin: 0; }
+#wpforms-form-1404 .wpforms-field { padding: 0; margin-bottom: 40px; }
+#wpforms-form-1404 .wpforms-field-label { line-height: 24px; margin-bottom: 10px; }
+#wpforms-form-1404 .wpforms-required-label { color: #101c3d; font-weight: 400; }
+#wpforms-form-1404 .wpforms-field-required { color: #101c3d; }
+#wpforms-form-1404 textarea { line-height: 24px; }
+#wpforms-form-1404 .wpforms-submit-container { margin-top: 0; }
+/* WPForms' fixed height clips PowerPack's existing 15px / 32px button padding. */
+#wpforms-form-1404 .wpforms-submit { height: auto; }
+
+/* Reference mobile layout: full-width grey panel and a smaller fluid heading. */
+@media (max-width: 767px) {
+	.fl-builder-content .fl-module-box:has(> .bb-box-contains-powerpack-wpforms-module) { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+	.fl-builder-content .bb-box-contains-powerpack-wpforms-module { margin-inline: -20px; padding: 40px 20px; }
+	.fl-builder-content .wpforms-contactus-heading-style { font-size: clamp(18px, 12.963303px + .917431vw, 20px); }
+}
+/* Insights uses the same saved Loop on the home page and the posts archive.
+ * Beaver Builder appends an instance suffix when it embeds the saved Box. */
+.fl-builder-content [data-node^="rvxlcs1egfmn"],
+.fl-builder-content .fl-module-box:has(> .bb-box-which-contains-wp-grid-builder-facelet) {
+	max-width: 1400px;
+}
+
+.fl-builder-content [data-node^="uz9v3b76tk1f"] > .fl-loop-grid {
+	column-gap: 2.142857%;
+	row-gap: 90px;
+}
+
+/* The rich-text module supplies the tag and date fonts. Remove its empty
+ * lines and let the headline grow so dates align along each row. */
+.fl-builder-content .posts-cards-in-post-loop-which-contain-blue-border-line-in-botom-with-normal-and-hover-effects {
+	--insights-gap: 15px;
+	position: relative;
+	padding: 0 0 20px;
+	border-bottom: 0;
+	gap: 0;
+
+	&::after {
+		content: "";
+		position: absolute;
+		inset: auto auto 0 0;
+		width: min(100px, 100%);
+		height: 3px;
+		background: #5dccdb;
+		pointer-events: none;
+		transition: width .2s;
+	}
+	&:is(:hover, :focus-within)::after { width: 100%; }
+
+	.bb-box-which-contain-post-featured-images-in-post-loop { margin-bottom: 10%; }
+	.bb-box-which-contain-post-featured-images-in-post-loop:not(:has(img))::before {
+		content: "";
+		width: 100%;
+		aspect-ratio: 748 / 400;
+		background: #101c3d;
+	}
+	.post-featured-images-in-post-loop-through-photo-module { margin: 0; }
+	.post-featured-images-in-post-loop-through-photo-module img { display: block; width: 100%; aspect-ratio: 748 / 400; object-fit: cover; }
+	.post-category-text-module-in-post-loop br,
+	.bb-box-for-post-category-in-post-loop:not(:has(a)) { display: none; }
+	:is(.post-category-text-module-in-post-loop, .post-date-text-module-in-post-loop) p { line-height: 1.5; }
+	.bb-box-for-post-category-in-post-loop, .bb-box-for-post-heading-in-post-loop { min-height: 0; }
+	.bb-box-for-post-heading-in-post-loop { margin-block: var(--insights-gap); flex-grow: 1; align-items: start; }
+	.post-heading-heading-module-in-post-loop { line-height: 34px; }
+
+	/* Extend the existing permalink across the card, including its whitespace. */
+	.post-heading-heading-module-in-post-loop a::before { content: ""; position: absolute; inset: 0; z-index: 1; }
+	.post-heading-heading-module-in-post-loop a:focus-visible::before { outline: 2px solid #101c3d; outline-offset: 3px; }
+}
+
+/* The preceding statistics section already supplies 50px below its background. */
+.home .fl-builder-content [data-node="1wplijobhges"] {
+	--insights-section-space: 100px;
+	padding-block: calc(var(--insights-section-space) - 50px) var(--insights-section-space);
+}
+.home .fl-builder-content [data-node^="rvxlcs1egfmn"] { gap: 0; }
+.home .fl-builder-content [data-node^="e3uyhirfdcwx"] .fl-heading {
+	font-size: clamp(24px, 4.566px + 2.53378vw, 34px);
+	line-height: clamp(32px, 4.792px + 3.5473vw, 46px);
+	margin-bottom: .8em;
+}
+/* Astra underlines links in page content. The card's bottom line signals interaction. */
+.home .fl-builder-content :is(.post-heading-heading-module-in-post-loop, .post-category-text-module-in-post-loop) a { text-decoration: none; }
+.home .fl-builder-content [data-node^="60jdps3hnmru"] { padding-block: 70px 0; }
+.home .fl-builder-content [data-node^="60jdps3hnmru"] a.fl-button {
+	padding: 15px 32px;
+	font-weight: 600;
+	line-height: 1;
+	text-transform: capitalize;
+	transition: background-color .1s, color .1s;
+}
+.home .fl-builder-content [data-node^="60jdps3hnmru"] a.fl-button:is(:hover, :focus-visible) { background-color: #5dccdb; }
+
+/* Align the archive controls to the same edges as the cards. */
+.blog .fl-builder-content [data-node="o9pzbgj2n15c"] { margin-top: 0; }
+.blog .fl-builder-content [data-node="jmn7rd0cogiz"] { padding-block: 60px 100px; gap: 55px; }
+.fl-builder-content .fl-module-box:has(> .bb-box-which-contains-wp-grid-builder-facelet) { align-items: end; justify-content: space-between; }
+.fl-builder-content .bb-box-which-contains-wp-grid-builder-facelet { width: auto; }
+#news-insights-active-category-display-text-module p { line-height: 34px; }
+
+/* Keep the real WP Grid Builder select for keyboard, touch and AJAX filtering. */
+#news-insights-filter-wp-grid-builder-facelet {
+	fieldset { margin: 0; }
+	label {
+		display: flex;
+		position: relative;
+		align-items: center;
+		justify-content: space-between;
+		gap: 40px;
+		padding: 15px 32px;
+		border: 3px solid #222;
+		border-radius: 10px;
+		color: #222;
+		font: 700 16px/1 Montserrat, sans-serif;
+		transition: background-color .2s, color .2s;
+	}
+	label:has(select):is(:hover, :focus-within) { background: #101c3d; border-color: #101c3d; color: white; }
+	label::after { content: ""; width: 8px; height: 8px; border: solid currentColor; border-width: 0 2px 2px 0; transform: translateY(-2px) rotate(45deg); }
+	label:has(select:open)::after { transform: translateY(2px) rotate(225deg); }
+	.wpgb-select-controls { display: none; }
+	select { position: absolute; inset: 0; width: 100%; height: 100%; padding: 0; border: 0; opacity: 0; cursor: pointer; }
+
+	/* Browsers with a styleable native picker also get the reference menu. */
+	@supports (appearance: base-select) {
+		select, select::picker(select) { appearance: base-select; }
+		select::picker(select) {
+			justify-self: end;
+			max-width: min(30rem, calc(100vw - 40px));
+			padding: 20px;
+			border: 0;
+			border-radius: 8px;
+			background: #f8f8f8;
+			box-shadow: 0 10px 20px -5px #767b91;
+		}
+		option { gap: 8px; padding: 10px; color: #626262; font: 700 16px/24px Montserrat, sans-serif; white-space: normal; }
+		option + option { border-top: 1px solid #e5e5e5; }
+		option:is(:checked, :hover, :focus) { color: #101c3d; text-decoration: underline; }
+	}
+}
+
+/* Use Beaver Builder's pagination links when the archive exceeds one page. */
+.blog [data-node="uz9v3b76tk1f"] .fl-builder-pagination {
+	padding: 80px 0 0;
+	ul { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; }
+	.page-numbers:not(ul) { margin: 0; border: 0; font: 20px/24px Montserrat, sans-serif; color: #626262; }
+	.page-numbers.current { background: transparent; color: #222; font-weight: 700; }
+	a:not(.prev, .next) { text-decoration: underline; }
+	:is(.prev, .next) { position: relative; width: 48px; height: 48px; overflow: hidden; text-indent: -9999px; border-radius: 10px; background: #101c3d; }
+	:is(.prev, .next)::before { content: ""; position: absolute; inset: 0; margin: auto; width: 10px; height: 10px; border: solid white; border-width: 2px 2px 0 0; transform: rotate(45deg); }
+	.prev::before { transform: rotate(-135deg); }
+	:is(.prev, .next):is(:hover, :focus-visible) { background: #5dccdb; }
+}
+.home [data-node^="uz9v3b76tk1f"] .fl-builder-pagination { display: none; }
+@media (max-width: 359px) {
+	.blog [data-node="uz9v3b76tk1f"] .fl-builder-pagination li:not(:has(.prev, .next, .current)) { display: none; }
+}
+/* Upper footer links gain an underline. Legal links already have one at rest. */
+.fl-builder-content :is(.footer-upper-section-blue-heading-links, .footer-upper-section-text-links) a:is(:hover, :focus-visible) { text-decoration: underline; }
+/* The rich-text preset also underlines the parent paragraph and module. */
+.fl-builder-content .footer-bottom-section-text-links.fl-rich-text:has(a:is(:hover, :focus-visible)),
+.fl-builder-content .footer-bottom-section-text-links.fl-rich-text:has(a:is(:hover, :focus-visible)) :is(p, a, span) { text-decoration: none; }
+
+@media (max-width: 1199px) {
+	.home .fl-builder-content [data-node="1wplijobhges"] { --insights-section-space: 75px; }
+}
+@media (max-width: 999px) {
+	.fl-builder-content [data-node^="uz9v3b76tk1f"] > .fl-loop-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 40px; }
+	.home .fl-builder-content [data-node^="60jdps3hnmru"] { padding-top: 30px; }
+}
+@media (min-width: 700px) and (max-width: 999px) {
+	.home [data-node^="uz9v3b76tk1f"] .fl-loop-item:nth-child(3) { display: none; }
+}
+@media (max-width: 767px) {
+	.home .fl-builder-content [data-node="1wplijobhges"] { --insights-section-space: 60px; }
+	.home .fl-builder-content [data-node^="e3uyhirfdcwx"] .fl-heading {
+		font-size: clamp(20px, 9.927px + 1.83486vw, 24px);
+		line-height: clamp(26px, 10.89px + 2.75229vw, 32px);
+	}
+	.fl-builder-content .post-heading-heading-module-in-post-loop.fl-heading { font-size: 22px; line-height: 36px; }
+	.fl-builder-content .fl-module-box:has(> .bb-box-which-contains-wp-grid-builder-facelet) { flex-direction: column-reverse; align-items: start; gap: 40px; }
+	.fl-builder-content .bb-box-which-contain-text-module-of-active-category-display { width: 100%; }
+	.blog .fl-builder-content [data-node="jmn7rd0cogiz"] { gap: 40px; }
+}
+@media (max-width: 669px) {
+	.fl-builder-content [data-node^="uz9v3b76tk1f"] > .fl-loop-grid { grid-template-columns: minmax(0, 1fr); row-gap: 30px; }
+}
+@media (max-width: 549px) {
+	.fl-builder-content .posts-cards-in-post-loop-which-contain-blue-border-line-in-botom-with-normal-and-hover-effects { --insights-gap: 10px; }
+	.fl-builder-content .post-heading-heading-module-in-post-loop.fl-heading { font-size: 20px; line-height: 32px; }
+	.fl-builder-content .fl-loop-item .post-date-text-module-in-post-loop.fl-module-rich-text.fl-rich-text p { font-size: 14px; }
+	.fl-builder-content .bb-box-which-contains-wp-grid-builder-facelet,
+	#news-insights-filter-wp-grid-builder-facelet { width: 100%; }
+	.blog .fl-builder-content [data-node="jmn7rd0cogiz"] { gap: 20px; }
+}
+@media (prefers-reduced-motion: reduce) {
+	.posts-cards-in-post-loop-which-contain-blue-border-line-in-botom-with-normal-and-hover-effects::after,
+	#news-insights-filter-wp-grid-builder-facelet label { transition: none; }
+}
