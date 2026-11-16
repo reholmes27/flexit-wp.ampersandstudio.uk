@@ -140,7 +140,11 @@ function flexit_connect_insights_loop( $module ) {
 		return;
 	}
 
-	$module->settings->wpgb = array( 'post_id' => 1623 ); // Published Post Loop Section template.
+	// The facet provider uses the archive page to calculate the loop's post offset.
+	$module->settings->wpgb = array(
+		'post_id' => 1623, // Published Post Loop Section template.
+		'paged'   => (int) get_query_var( 'paged' ),
+	);
 	add_filter( 'wp_grid_builder_beaver_builder/handle_module', 'flexit_handle_insights_loop', 20, 2 );
 }
 add_action( 'fl_builder_before_render_module', 'flexit_connect_insights_loop', 5 );
@@ -156,3 +160,18 @@ function flexit_insights_category_display() {
 	return '<span data-insights-category aria-live="polite">' . esc_html__( 'All', 'astra-child' ) . '</span>';
 }
 add_shortcode( 'news-insights-active-category-display', 'flexit_insights_category_display' );
+
+/** Use the saved News & Insights loop's page size when WordPress resolves /page/N/. */
+function flexit_insights_page_size( $query ) {
+	if ( is_admin() || ! $query->is_main_query() || ! $query->is_posts_page || $query->is_feed() ) {
+		return;
+	}
+
+	$layout    = get_post_meta( 1623, '_fl_builder_data', true );
+	$page_size = (int) ( $layout['uz9v3b76tk1f']->settings->posts_per_page ?? 0 );
+	if ( $page_size > 0 ) {
+		$query->set( 'posts_per_page', $page_size );
+	}
+}
+// Astra sets its blog limit on this hook at priority 10.
+add_action( 'parse_tax_query', 'flexit_insights_page_size', 20 );
