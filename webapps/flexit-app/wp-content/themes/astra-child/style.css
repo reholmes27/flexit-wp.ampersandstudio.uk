@@ -10,6 +10,17 @@ Text Domain: cinnamon
 Template: astra
 */
 
+.content-section a {
+	text-decoration: underline;
+	font-style: italic;
+}
+
+blockquote {
+	border-color: #5DCCDB;
+	border-left: 5px solid #5DCCDB;
+	font-size: 26px;
+}
+
 /* Desktop primary dropdowns: fit their own items, including future menu edits. */
 @media (min-width: 993px) {
 	/* Reference active trail: 4px blue line, 6px below the label's line box. */
@@ -258,13 +269,17 @@ Template: astra
 }
 
 /* Colour only unordered-list bullets; supports the class on the list or its module. */
+.content-section ul > li::marker,
 ul.blue-bullets > li::marker,
-.blue-bullets ul > li::marker {
-	color: #5dcddb;
+.blue-bullets ul > li::marker,
+.highlight-text,
+.content-section.case-studies h4 {
+	color: #5dcddb!important;
 }
 
 /* Match the reference list's 0.8em gap without adding space after the last item. */
-ul.blue-bullets > li:not(:last-child) { margin-bottom: 0.8em; }
+ul.blue-bullets > li:not(:last-child),
+.content-section ul li:not(:last-child)  { margin-bottom: 0.8em; }
 
 /* Opt-in link utility: remove the underline on hover only. */
 a.no-underline-on-hour:hover {
@@ -411,9 +426,6 @@ ol.ordered-list-items-style > li::marker { font-weight: 700; }
 	.bb-box-for-post-heading-in-post-loop { margin-block: var(--insights-gap); flex-grow: 1; align-items: start; }
 	.post-heading-heading-module-in-post-loop { line-height: 34px; }
 
-	/* Extend the existing permalink across the card, including its whitespace. */
-	.post-heading-heading-module-in-post-loop a::before { content: ""; position: absolute; inset: 0; z-index: 1; }
-	.post-heading-heading-module-in-post-loop a:focus-visible::before { outline: 2px solid #101c3d; outline-offset: 3px; }
 }
 
 /* The preceding statistics section already supplies 50px below its background. */

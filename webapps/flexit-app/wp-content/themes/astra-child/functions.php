@@ -11,7 +11,7 @@
 /**
  * Define Constants
  */
-define( 'CHILD_THEME_CINNAMON_VERSION', '1.0.3' );
+define( 'CHILD_THEME_CINNAMON_VERSION', '1.0.13' );
 
 /**
  * Enqueue styles
@@ -37,7 +37,7 @@ function child_enqueue_scripts() {
    
    wp_register_script( 'slick-carousel', '//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js', array( 'jquery' ), '1.8.1', true );
    wp_enqueue_script( 'slick-carousel' );
-   wp_enqueue_script( 'cinnamon-theme-js', get_stylesheet_directory_uri().'/assets/js/cinnamon.js', array( 'jquery' ), CHILD_THEME_CINNAMON_VERSION, true );
+   //wp_enqueue_script( 'cinnamon-theme-js', get_stylesheet_directory_uri().'/assets/js/cinnamon.js', array( 'jquery' ), CHILD_THEME_CINNAMON_VERSION, true );
    
 }
 add_action( 'wp_enqueue_scripts', 'child_enqueue_scripts', 15 );
